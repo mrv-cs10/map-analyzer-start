@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Map Analyzer</title>
+  <link rel="stylesheet" type="text/css" href="mystyle.css">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+</head>
+
+<body>
+  <h1>Map Analyzer</h1>
+
+  <main>
+    <section id="rowNums"></section>
+    <section id="colNums"></section>
+    <section id="tiles"></section>
+  </main>
+
+  <section id="selectTile">
+    <div class="ground"></div>sand
+    <div class="bush"></div>tree
+    <div class="trees"></div>hills
+    <div class="water"></div>water
+  </section>
+
+  <section id="levelTabs">
+  </section>
+
+  <section id="currentTile">
+    ----
+  </section>
+
+  <section id="row-col">
+    row: <span id="row"></span> column: <span id="col"></span>
+  </section>
+
+  <!--  LOAD JAVASCRIPT -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="solutions.js"></script>
+  <script src="script.js"></script>
+
+</body>
+
+</html>
