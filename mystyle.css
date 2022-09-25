@@ -1,4 +1,8 @@
 /* Style Sheet */
+* {
+  box-sizing: border-box;
+}
+
 body {
   width: 700px;
   margin: 0 auto;
@@ -6,111 +10,71 @@ body {
   font-family: 'Open Sans', sans-serif;
 }
 
-/* Main holds rows, cols & map*/
-main {
-  width: 625px;
-  float: left;
-  overflow: auto;
+select {
+  padding: 5px;
 }
 
-#rowNums {
-  width: 25px;
-  float: left;
-  padding-top: 25px;
+#container {
+  display: grid;
+  grid-template-columns: repeat(13, 1fr);
 }
 
-#rowNums div {
-  width: 25px;
+#container div {
   height: 50px;
-  line-height: 50px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-#colNums div {
-  width: 50px;
-  height: 25px;
-  float: left;
+.tile {
+  border: 1px solid #333;
 }
 
-#tiles div {
-  width: 48px;
-  height: 48px;
-  border: 1px solid black;
-  float: left;
+.active {
+  border: 3px solid red;
 }
 
 /* Tile Legend */
 #selectTile {
-  width: 50px;
-  float: left;
-  margin: 80px 0 0 25px;
+  display: flex;
+  justify-content: center;
+  margin-block: 50px;
 }
 
 #selectTile div {
+  margin-inline: 10px;
+}
+
+#selectTile div div {
   width: 48px;
   height: 48px;
   border: 1px solid black;
 }
 
-/* Lebel Tab Styles */
-#levelTabs {
-  clear: both;
-  margin-left: 25px;
-}
-
-#levelTabs div {
-  font-size: 9px;
-  padding: 2px 0;
-  width: 41px;
-/*  background-color: grey;*/
-  color: white;
-  border: 1px solid black;
-  border-radius: 0 0 10px 10px;
-  float: left;
-}
-
-#levelTabs div:hover {
-  background-color: black;
-  cursor: pointer;
-}
-
-.active {
-	background-color: black;
-}
-
-.inactive {
-	background-color: grey;
-}
-
 /* Text for current tile */
 #currentTile {
-  clear: both;
   padding-top: 25px;
   font-size: 48px;
 }
 
-/* Row & Column Display */
-#row, #col {
-  margin: 0 15px;
-}
-
-
 /* Image Classes */
 .ground {
-  background-image: url("images/ground.png");
+  background: url('images/ground.png') no-repeat center;
+  background-size: cover;
 }
 
 .trees {
-  background-image: url("images/trees.png");
+  background: url('images/trees.png') no-repeat center;
+  background-size: cover;
 }
 
 .bush {
-  background-image: url("images/bush.png");
+  background: url('images/bush.png') no-repeat center;
+  background-size: cover;
 }
 
 .water {
-  background-image: url("images/water.png");
-}
-
-.link {
-  background-image: url("images/link_right1.png");
+  background: url('images/water.png') no-repeat center;
+  background-size: cover;
 }

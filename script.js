@@ -2,56 +2,18 @@
 'use strict'; // Use strict mode
 
 // Global Variables
+let level = 'level1';
 let mapData;
+let mapEls = [];
 fetch('maps.json')
   .then((res) => res.json())
   .then((data) => {
     mapData = data;
-    initMap();
+    initMapHTML();
   });
 
-// Add Event Listeners
-// $("#tiles div").on("mouseenter", enterTile);
-// $("#tiles div").on("mouseleave", exitTile);
-// $("#levelTabs div").on("click", setLevel);
-
-// Event Functions
-function enterTile() {
-  // Get row and col from tileID - "eg. c1-2"
-  let tileId = $(this).attr('id');
-  tileId = tileId.slice(1); // remove c
-  tileId = tileId.split('-'); // split into array
-  row = +tileId[0];
-  column = +tileId[1];
-
-  // Add border to show which tile the mouse is on and display row & column
-  $(this).css('border', '1px solid red');
-  $('#row').html(row);
-  $('#col').html(column);
-
-  // Call student function to test tile
-  testTiles();
-}
-
-function exitTile() {
-  // Set border back to black
-  $(this).css('border', '1px solid black');
-}
-
-function setLevel() {
-  // Clear all tabs
-  $('#levelTabs div').removeClass().addClass('inactive');
-
-  // Update level
-  level = $(this).html(); // Set level variable
-  $(this).removeClass('inactive').addClass('active'); // Update current tab
-
-  // Draw New Map
-  drawMap();
-}
-
 // Helper Functions
-function initMap() {
+function initMapHTML() {
   let containerEl = document.getElementById('container');
 
   // First Row (Column Numbers)
@@ -63,67 +25,89 @@ function initMap() {
   }
 
   // Remaining Rows (Row Number and Tiles)
-  for (let row = 0; row < 8; row++) {}
-
-  // Add Tile Divs using Map Data Array (8 rows x 12 cols)
-  let tileId;
   for (let row = 0; row < 8; row++) {
+    // Row Number
+    let divEl = document.createElement('div');
+    divEl.innerHTML = row;
+    containerEl.appendChild(divEl);
+    // Row Tiles
+    let tempRowEls = [];
     for (let col = 0; col < 12; col++) {
-      tileId = 'c' + row + '-' + col;
-      $('#tiles').append(
-        "<div id='" +
-          tileId +
-          "' class='" +
-          mapData['Level 1'][row][col] +
-          "' ondragstart='return false;' ondrop='return false;'></div>"
-      );
+      let divEl = document.createElement('div');
+      divEl.dataset.row = row;
+      divEl.dataset.col = col;
+      divEl.className = 'tile';
+      divEl.addEventListener('mouseenter', mouseEnterHandler);
+      divEl.addEventListener('mouseleave', mouseLeaveHandler);
+      containerEl.appendChild(divEl);
+      tempRowEls.push(divEl);
     }
+    mapEls.push(tempRowEls);
   }
 
   // Draw Level 1 Map
   drawMap('level1');
 }
 
-function drawMap() {
+function drawMap(level) {
   let map = mapData[level];
-  let tileId;
   for (let row = 0; row < 8; row++) {
     for (let col = 0; col < 12; col++) {
-      tileId = '#c' + row + '-' + col;
-      $(tileId).removeClass();
-      $(tileId).addClass(map[row][col]);
+      mapEls[row][col].className = `${map[row][col]} tile`;
     }
   }
 }
 
+// Event Listeners
+function mouseEnterHandler(e) {
+  e.target.classList.add('active');
+  row = e.target.dataset.row;
+  column = e.target.dataset.col;
+  document.getElementById('row').innerHTML = row;
+  document.getElementById('col').innerHTML = column;
+
+  testTiles();
+}
+
+function mouseLeaveHandler(e) {
+  e.target.classList.remove('active');
+}
+
+document.getElementById('level-select').addEventListener('input', levelSelect);
+
+function levelSelect(e) {
+  level = e.target.value;
+  drawMap(level);
+}
+
 function testTiles() {
-  if (level === 'Level 1') {
+  if (level === 'level1') {
     level1Solution();
-  } else if (level === 'Level 2') {
+  } else if (level === 'level2') {
     level2Solution();
-  } else if (level === 'Level 3') {
+  } else if (level === 'level3') {
     level3Solution();
-  } else if (level === 'Level 4') {
+  } else if (level === 'level4') {
     level4Solution();
-  } else if (level === 'Level 5') {
+  } else if (level === 'level5') {
     level5Solution();
-  } else if (level === 'Level 6') {
+  } else if (level === 'level6') {
     level6Solution();
-  } else if (level === 'Level 7') {
+  } else if (level === 'level7') {
     level7Solution();
-  } else if (level === 'Level 8') {
+  } else if (level === 'level8') {
     level8Solution();
-  } else if (level === 'Level 9') {
+  } else if (level === 'level9') {
     level9Solution();
-  } else if (level === 'Level 10') {
+  } else if (level === 'level10') {
     level10Solution();
-  } else if (level === 'Level 11') {
+  } else if (level === 'level11') {
     level11Solution();
-  } else if (level === 'Level 12') {
+  } else if (level === 'level12') {
     level12Solution();
-  } else if (level === 'Level 13') {
+  } else if (level === 'level13') {
     level13Solution();
-  } else if (level == 'Level 14') {
+  } else if (level == 'level14') {
     level14Solution();
   }
 }
