@@ -60,8 +60,8 @@ function drawMap(level) {
 // Event Listeners
 function mouseEnterHandler(e) {
   e.target.classList.add("active");
-  row = e.target.dataset.row;
-  column = e.target.dataset.col;
+  row = +e.target.dataset.row;
+  column = +e.target.dataset.col;
   document.getElementById("row").innerHTML = row;
   document.getElementById("col").innerHTML = column;
 
